@@ -1,0 +1,90 @@
+in loose order:
+
+	* gas errors have the line number wrong by 1
+	* no argument commands (e.g. nop and ret) eat the
+	  next character (e.g. label on the next line loses
+	  first char)
+	  (probably the same bug as the 1st one)
+	- "ldb	@@rr2,rl0" gives segfault (double "@@")
+	* "inc r15,#28" doesn't give an error
+	* "ldk r1,#16" doesn't give an error
+	- check this out:
+	  disassembled:
+	    28:   5402 8200 0100  ldl     rr2,0x20100
+	  reassembled:
+	    68:   5402 0002       ldl     rr2,0x2
+	  it should probably disassemble to
+				  ldl	  rr2,0x82000100
+	  or
+				  ldl	  rr2,#0x82000100
+	  ???? 
+	+ check this out:
+	  !buff:	.ds.b	7
+	  buff:	.ascii	"rs232"
+	  !	.byte	1,2,3,4
+	  	.ds.b	7
+	  buffsz	=	. - buff
+	  buffsz = 0 then!!
+	* ei <arg>
+	  di <arg>
+	  arg must be empty!
+	  -> arg must be vi, nvi, both, or all!
+	* if there is no .z8001 directive in the source file, the
+	  resulting obj file is tagged as being z8002, despite the
+	  -z8001 command line switch
+	* disassembly of opcode 0x200f
+	* check out/in indirect:
+	     824:	3f10           	out	@rr1,r0
+	  should be "out @1,r0"
+	- see stuff in sctrace.s (@@@, 2 items)
+	* check this:
+	    1e5a:	b311 fffe      	srl	r1,#0xffffff02
+	* push	@s,r4  (invalid)
+	* ldb	rl7.rl0
+	* newlib: fix stdcall parameters (e.g. error.S)
+	+ linking with many "jr t,.+2" doesn't work (see fcwtst.s 1.1)
+	- "ldl rr12,@rr14(#28)" doesn't throw an error and compiles as
+	  "ldl rr12,@rr14"
+	- "rl r1" for "rl r1,#1" gives an error. Parameter cannot be
+	  omitted for a default of 1
+	- check: disassemble ff ff ff ff ff...
+	- "ldl rr(#76),rr0" gives segfault
+	- how to load value from absolute address <<A>>A2?
+	  "ld r0,0xa00a2" generates "ld r0,0xa"  (linked to be at
+	                                          segment A) 
+	  one needs to specify "ld r0,0x8a0000a2"
+	* "r0_loop: djnz r1,r0_loop" does not work
+	* unhelpful error message for jump out of range: at
+	  end of file
+	- wrong assembly:
+	  x.s:
+	        .z8001
+	        .text
+	
+	        ld      r0,0xfafa
+	        nop
+	        .end
+	  compile:
+	   z8k-pcos-as x.s -o x.o
+	   z8k-pcos-ld -o x.coff x.o
+	  disassemble:
+	  z8k-pcos-objdump -d x.coff 
+	    x.coff:     file format coff-z8k
+	    Disassembly of section .text:
+	    00000000 <.text>:
+	       0:   6100 0000       ld      r0,0x0
+	       4:   fafa            djnz    r10,0xffffff12
+	       6:   8d07            nop
+	  DJNZ???
+
+
+- open
++ fixed for non -linkrelax
+* fixed
+
+------------- files containing version info ------------
+bfd/configure
+bfd/configure.in
+gas/doc/gasver.texi
+gcc/gcov.c
+gcc/version.c
