@@ -37,6 +37,13 @@
 /* Modes ok for regs, used in tm.h for HARD_REGNO_MODE_OK */
 int hard_regno_mode_ok[FIRST_PSEUDO_REGISTER];
 
+char *call_used_option;
+char *args_in_option;
+char *args_mlist;
+char *fakes_option;
+int pmode;
+int saved_reg_on_stack_hack;
+
 extern int warn_cpg;
 
 /* We can change which reg has the sp or fp, using this

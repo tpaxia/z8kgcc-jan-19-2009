@@ -3059,9 +3059,9 @@ identifier_typedecl_value (node)
 }
 
 /* CYGNUS LOCAL Embedded C++ */
-#ifdef __GNUC__
-__inline
-#endif
+//#ifdef __GNUC__
+//__inline
+//#endif
 void
 embedded_pedwarn (s)
      char *s;

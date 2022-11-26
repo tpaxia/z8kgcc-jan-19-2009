@@ -46,6 +46,9 @@ enum gmon_ptr_signedness {
   ptr_unsigned
 };
 
+histogram *histograms;
+unsigned num_histograms;
+
 static enum gmon_ptr_size gmon_get_ptr_size (void);
 static enum gmon_ptr_signedness gmon_get_ptr_signedness (void);
 

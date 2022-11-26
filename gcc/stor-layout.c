@@ -21,7 +21,7 @@ Boston, MA 02111-1307, USA.  */
 
 #include "config.h"
 #include <stdio.h>
-
+#include "rtl.h"
 #include "tree.h"
 #include "flags.h"
 #include "except.h"
@@ -114,11 +114,12 @@ variable_size (size)
       return size_int (1);
     }
 
-  if (immediate_size_expand)
+  if (immediate_size_expand) {
     /* NULL_RTX is not defined; neither is the rtx type. 
        Also, we would like to pass const0_rtx here, but don't have it.  */
-    expand_expr (size, expand_expr (integer_zero_node, NULL_PTR, VOIDmode, 0),
-		 VOIDmode, 0);
+    rtx temp=expand_expr (integer_zero_node, NULL_PTR, VOIDmode, 0);
+    expand_expr (size, temp, VOIDmode, 0);
+  }
   else
     pending_sizes = tree_cons (NULL_TREE, size, pending_sizes);
 

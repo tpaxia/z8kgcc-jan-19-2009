@@ -54,7 +54,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 
 /* Run-time compilation parameters selecting different hardware subsets.  */
-int target_flags;
+extern int target_flags;
 
 /* This means that the target is a Z8001, so we use `big' mode
    addressing */
@@ -199,10 +199,10 @@ int target_flags;
 
 
 /* -m options which take arguments */
-char *call_used_option;
-char *args_in_option;
-char *args_mlist;
-char *fakes_option;
+extern char *call_used_option;
+extern char *args_in_option;
+extern char *args_mlist;
+extern char *fakes_option;
 
 #define TARGET_OPTIONS { { "call-used-",&call_used_option},\
 			 { "args-in", &args_in_option}, \
@@ -1222,7 +1222,7 @@ extern struct rtx_def *legitimize_address();
    between pointers and any other objects of this machine mode.  */
 
 
-int pmode;
+extern int pmode;
 #define Pmode pmode  /* set in z8k.c */
 #define Imode HImode
 /* Mode of a function address in a call instruction (for indexing purposes). */
@@ -1728,7 +1728,7 @@ do { DP { fprintf (asm_out_file, "\t.def\t");		\
 	      "%s\t.val\t.%s\t.scl\t-1%s\t.endef\n",	\
 	      SDB_DELIM, SDB_DELIM, SDB_DELIM); } } while (0)
 
-int saved_reg_on_stack_hack;
+extern int saved_reg_on_stack_hack;
 
 #define TARGET_MEM_FUNCTIONS
 

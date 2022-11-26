@@ -2918,6 +2918,12 @@ for machine in $build $host $target; do
  			thread_file='posix'
  		fi
 		;;
+	arm-apple-darwin*)
+		tm_file=i386/linux.h
+		out_file=i386/i386.c
+#	        tmake_file="rs6000/t-ppcos t-linux rs6000/t-ppccomm"
+		xmake_file=x-linux
+		;;
 	i[3456]86-apple-darwin*)
 		tm_file=i386/linux.h
 		out_file=i386/i386.c

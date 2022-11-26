@@ -162,9 +162,9 @@ static struct resword wordlist[] =
       {"long",  TYPESPEC, RID_LONG},
 };
 
-#ifdef __GNUC__
-inline
-#endif
+//#ifdef __GNUC__
+//inline
+//#endif
 struct resword *
 is_reserved_word (str, len)
      register char *str;
