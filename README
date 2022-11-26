@@ -4,6 +4,7 @@ This repository contains a modified version of the GCC ECOS z8k compiler
 adapted by Christian Groessler.
 Unfortunately Christian's version didn't work on modern machines, so 
 I hacked it to run on my M1 Mac (running Ventura).
+It requires GCC (I used GCC 12.2.0).
 I have no idea if it works on other machines.
 
 Follow the instructions on 
@@ -12,3 +13,5 @@ www.z80ne.com/m20/sections/download/z8kgcc/z8kgcc.html
 but add 
    -enable-werror=no 
 to the configure command.
+
+Sometimes the make stops. Just make again. As described in the manual, for target coff the md5 library must be compiled manually.
