@@ -15,3 +15,9 @@ but add
 to the configure command.
 
 Sometimes the make stops. Just make again. As described in the manual, for target coff the md5 library must be compiled manually.
+
+In addition, if you get errors compiling texinfo files, execute 
+   
+   find -name '*.texinfo' | sed 's/texinfo$/info/' | xargs touch
+   
+see https://github.com/CTSRD-CHERI/binutils/issues/6
